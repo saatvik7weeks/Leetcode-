@@ -1,0 +1,27 @@
+class Solution {
+public:
+  string convert(string s, int numRows) {
+    if (numRows == 1) {
+      return s;
+    }
+    vector<string> ans(numRows);
+    bool game = false;
+    int i = 0;
+    for (auto ch : s) {
+      ans[i] += ch;
+      if (i == 0 or i == numRows - 1) {
+        game = !game;
+      }
+      if (game) {
+        i++;
+      } else {
+        i--;
+      }
+    }
+    string zigzag = "";
+    for (auto str : ans) {
+      zigzag += str;
+    }
+    return zigzag;
+  }
+};
