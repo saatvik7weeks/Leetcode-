@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int minIncrementForUnique(vector<int>& nums) {
+        // Sort the array to handle duplicates in order
+        sort(nums.begin(), nums.end());
+        int steps = 0;
+        int next_min = nums[0];
+        
+        for (int num : nums) {
+            if (num < next_min) {
+                // If current number is less than next_min, increment it to next_min
+                steps += next_min - num;
+                next_min++;
+            } else {
+                // Otherwise, just update next_min to be one more than the current number
+                next_min = num + 1;
+            }
+        }
+        
+        return steps;
+    }
+};
