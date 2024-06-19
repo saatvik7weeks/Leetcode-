@@ -1,0 +1,49 @@
+class Solution {
+    private:
+    int canmakeflowers(vector<int>& bloomDay,int mid,int k)
+    {
+        int consecutiveflower=0;
+        int totalbouq=0;
+        for (int i=0;i<bloomDay.size();i++)
+        {
+            if (bloomDay[i]<=mid)
+            {
+                consecutiveflower++;
+            }
+            else
+            {
+                consecutiveflower=0;
+            }
+
+            if(consecutiveflower==k)
+            {
+                 totalbouq++;
+                 consecutiveflower=0;
+            }
+        }
+        return totalbouq;
+    }
+public:
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        int start=0;
+        int endday=*max_element(bloomDay.begin(),bloomDay.end());
+        int result=-1;
+        while (start<=endday)
+        {
+            int mid=start+(endday-start)/2;//donot make this mistake saatvik
+
+            if(canmakeflowers(bloomDay,mid,k)>=m)
+            {
+                result=mid;
+                endday=mid-1;
+            }
+            else
+            {
+                start=mid+1;
+            }
+        }
+        return result;
+         
+                  
+    }
+};
