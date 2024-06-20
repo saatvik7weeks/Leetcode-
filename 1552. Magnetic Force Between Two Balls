@@ -1,0 +1,45 @@
+class Solution {
+    private:
+    bool checkposi(int mid,vector<int>& position, int m)
+    {
+       int start=position[0];
+       int ballsleft=1;
+       for (int i=0;i<position.size();i++)
+       {
+        int curr=position[i];
+        if (curr-start>=mid)
+        {
+         start=curr;
+        ballsleft++;
+        }
+        if(ballsleft==m)
+        {
+            break;
+        }
+       } 
+       return (ballsleft==m); 
+
+    }
+public:
+    int maxDistance(vector<int>& position, int m) {
+        sort(position.begin(),position.end());
+        int size=position.size();
+        int posf=1;
+        int posl=position[size-1]-position[0];
+        int result=0;
+        while (posf<=posl)
+        {
+            int mid=posf+(posl-posf)/2;
+            if (checkposi(mid,position,m))
+            {
+                result=mid;
+                posf=mid+1;
+            }
+            else
+            {
+                posl=mid-1;
+            }
+        }
+        return result;
+    }
+};
