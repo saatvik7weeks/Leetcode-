@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int passThePillow(int n, int time) {
+        int i=1;
+        bool ghumao=true;
+        while (time!=0)
+        { 
+            if(i==n)
+            {
+                ghumao=false;
+            }
+            if(i==1)
+            {
+                ghumao=true;
+            }
+            if(ghumao==true)
+            {
+                i++;
+                
+            }
+            if(ghumao==false)
+            {
+                i--;
+                
+            }
+          time--;
+            
+        }
+        return i;
+        
+    }
+};
