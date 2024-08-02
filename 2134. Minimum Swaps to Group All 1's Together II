@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int minSwaps(vector<int>& nums) {
+        int n=nums.size();
+        vector <int>temp(2*n);
+   for (int i=0;i<2*n;i++)
+   {
+    temp[i]=nums[i%n];
+   }
+  int ones=accumulate(nums.begin(),nums.end(),0);
+  if(ones==0)
+  {
+    return 0;
+  }
+  int i=0,j=0;
+  int ans=INT_MAX;
+  int count=ones;
+  while (j<temp.size())
+  {
+   if (temp[j]==1)
+   {
+    ones--;
+   }
+   if(j-i+1==count)
+   {
+   ans=min(ans,ones);
+   if(temp[i]==1)
+   {
+    ones++;
+   }
+   i++;
+   }
+   j++;    
+  }
+  return ans;
+
+    }
+};
