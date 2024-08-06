@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int minimumPushes(string word) {
+        unordered_map<char,int>mp;
+        for(auto& i:word)
+        {
+            mp[i]++;
+        }
+        int count=0;
+        int track=0;
+        for (auto i:mp)
+        {
+             track++;
+              if(track<=8)
+            {
+                count=count+i.second;
+            }
+            if (track>8 && track<=16)
+            {
+                count=count+2*i.second;
+            }
+            if(track>16 && track<=24)
+            {
+                count=count+3*i.second;
+            }
+            if(track==25 || track==26)//ye yaad rakh alphabet 26 hote 24 nhi
+            {
+                count=count+4*i.second;
+            }
+           
+          
+        }
+        return count;
+
+    }
+};
