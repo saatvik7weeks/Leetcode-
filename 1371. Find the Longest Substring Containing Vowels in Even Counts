@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int findTheLongestSubstring(string s) {
+        unordered_map<string, int> mp;
+        vector<int> vec(5, 0);  // To store the state of vowels (a, e, i, o, u)
+        string str = "00000";   // Initial state (all vowels even)
+        mp[str] = -1;           // Map the initial state to -1 (before the start of the string)
+        int ans = 0;            // Changed from INT_MIN to 0 (as ans needs to handle 0-length substrings)
+
+        for (int i = 0; i < s.size(); i++) {
+            // Update the vowel state based on the current character
+            if (s[i] == 'a') {
+                vec[0] = (vec[0] + 1) % 2;
+            } else if (s[i] == 'e') {
+                vec[1] = (vec[1] + 1) % 2;
+            } else if (s[i] == 'i') {
+                vec[2] = (vec[2] + 1) % 2;
+            } else if (s[i] == 'o') {
+                vec[3] = (vec[3] + 1) % 2;
+            } else if (s[i] == 'u') {
+                vec[4] = (vec[4] + 1) % 2;
+            }
+
+            
+            str = "";
+            for (int j = 0; j < vec.size(); j++) {
+                str += to_string(vec[j]);
+            }
+
+           
+            if (mp.find(str) != mp.end()) {
+                ans = max(ans, i - mp[str]);  // Update the maximum length
+            } else {
+                mp[str] = i;  // Store the first occurrence of this state
+            }
+        }
+
+        return ans;
+    }
+};
+
+//THIS IS MY SOLUTION JUST RECTIFIED BY CHATGPT
