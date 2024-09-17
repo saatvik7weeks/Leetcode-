@@ -1,0 +1,46 @@
+class Solution {
+public:
+    vector<string> uncommonFromSentences(string s1, string s2) {
+        vector<string> vec;
+        unordered_map<string, int> mp; 
+        string str = "";
+
+        // Process s1
+        for (int i = 0; i < s1.size(); i++) {
+            if (s1[i] != ' ') {
+                str += s1[i];
+            } else {
+                mp[str]++;
+                str = "";
+            }  
+        }
+        // Add the last word from s1
+        if (!str.empty()) {
+            mp[str]++;
+        }
+
+        // Reset str and process s2
+        str = "";
+        for (int i = 0; i < s2.size(); i++) {
+            if (s2[i] != ' ') {
+                str += s2[i];
+            } else {
+                mp[str]++;
+                str = "";
+            }  
+        }
+        // Add the last word from s2
+        if (!str.empty()) {
+            mp[str]++;
+        }
+
+        // Collect words that appear exactly once
+        for (auto& i : mp) {
+            if (i.second == 1) {
+                vec.push_back(i.first);
+            }
+        }
+
+        return vec;
+    }
+};
