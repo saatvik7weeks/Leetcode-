@@ -1,0 +1,15 @@
+class Solution {
+public:
+    string addSpaces(string s, vector<int>& spaces) {
+        string ans = "";
+        int x = 0; // Start index for the current segment
+        
+        for (int i = 0; i < spaces.size(); i++) {
+            ans += s.substr(x, spaces[i] - x) + " "; // Add substring and a space
+            x = spaces[i]; // Update the start index
+        }
+        
+        ans += s.substr(x); // Add the remaining part of the string
+        return ans;
+    }
+};
